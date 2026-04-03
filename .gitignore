@@ -42,3 +42,6 @@
 
 # Text files
 *.txt
+
+# Input folders
+**/inputs
