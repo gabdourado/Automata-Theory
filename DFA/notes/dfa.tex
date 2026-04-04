@@ -189,14 +189,12 @@ onde:
   \end{algorithmic}
 \end{algorithm}
 
-\section{O que é função de transição parcial?}
-
-Observe que ao definir um AFD, usamos a \textbf{função de transição total}, o que implica que todo para todo par $(q, \sigma) \in Q \times \Sigma$ existe exatamente um estado destino $\delta(q, \sigma) \in Q$. Em alguns casos, algumas combinações $(q, \sigma) \in Q \times \Sigma$ simplesmente não têm transição definida, surge então a \textbf{função de transição parcial}:
-
+Ao definir um AFD, utilizamos a \textbf{função de transição total}, o que implica que para todo par $(q, \sigma) \in Q \times \Sigma$ existe exatamente um estado destino $\delta(q, \sigma) \in Q$. Em alguns casos, porém, nem todo par $(q, \sigma)$ possui transição definida. Surge então a \textbf{função de transição parcial}:
 \[
-\delta : Q \times \Sigma \rightharpoonup Q
+    \delta : Q \times \Sigma \rightharpoonup Q
 \]
-Para esses casos, teríamos que corrigir o algoritmo ~\ref{alg:afdCompleto}, verificando se a transição existe:
+onde $\rightharpoonup$ denota uma função parcial, isto é, $\delta(q, \sigma)$ pode não estar definido para alguns pares $(q, \sigma) \in Q \times \Sigma$. Quando o autômato atinge uma configuração sem transição definida, diz-se que a máquina \textbf{trava}, e a palavra é imediatamente rejeitada. Para esses casos, devemos corrigir o algoritmo~\ref{alg:afdCompleto}, verificando se a transição existe:
+
 \begin{algorithm}[H]
   \caption{Simulação de um AFD com $\delta(\cdot, \cdot)$ parcial}
   \label{alg:afdCompleto}
