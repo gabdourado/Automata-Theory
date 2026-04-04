@@ -1,7 +1,7 @@
 /*
     Autor: Gabriel de Souza Dourado
     Repositório: Automata Theory
-    Prática: DFA com função de transição parcial
+    Prática: AFD com função de transição total
     
     Instruções:
     
@@ -11,9 +11,7 @@
     
     3. Digitar os símbolos de Σ, separados por espaço (e.g.: a b)
     
-    4. Digitar o número de transições δ (e.g.: 4)
-    
-    5. Digitar as transições uma por linha (e.g.: 1 a 2) representando δ(1, a) = 2
+    4. Digitar as |Q|×|Σ| transições, uma por linha (e.g.: 1 a 2) representando δ(1, a) = 2
     
     5. Digitar o estado inicial q0 (e.g.: 1)
     
@@ -23,6 +21,7 @@
     
     8. Digitar as palavras a serem processadas uma por linha (e.g.: aba)
 */
+
 #include <iostream>
 #include <map>
 #include <set>
@@ -36,14 +35,10 @@ struct DFA {
     std::set<int>                       accepting;
 };
 
-bool simulate(const DFA& dfa, const std::string& w) {
+bool simulate(const DFA& dfa, const std::string w) {
     int current = dfa.initial;
     for (char c : w)
-        try {
-            current = dfa.delta.at({current, c});
-        } catch (const std::out_of_range&) {
-            return false;
-        }
+        current = dfa.delta.at({current, c});
     return dfa.accepting.count(current) > 0;
 }
 
@@ -63,8 +58,7 @@ int main() {
         dfa.alphabet.insert(c);
     }
 
-    int t; std::cin >> t;
-    for (int i = 0; i < t; i++) {
+    for (int i = 0; i < n_states * n_symbols; i++) {
         int p, q; char sym;
         std::cin >> p >> sym >> q;
         dfa.delta[{p, sym}] = q;
