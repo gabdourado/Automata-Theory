@@ -1,0 +1,247 @@
+% ============================================================
+%  template.tex — Notas Acadêmicas
+%  Autor: <Gabriel de Souza Dourado>
+% ============================================================
+
+\documentclass[12pt, a4paper]{article}
+
+% ── Codificação e Língua ────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+
+% ── Tipografia ──────────────────────────────────────────────
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% ── Margens ─────────────────────────────────────────────────
+\usepackage[
+  top=2.5cm, bottom=2.5cm,
+  left=2.8cm, right=2.8cm
+]{geometry}
+\setlength{\skip\footins}{1.5em}
+
+% ── Matemática ──────────────────────────────────────────────
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+
+% ── Algoritmos e Código ─────────────────────────────────────
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% ── Pseudocódigo ─────────────────────────────────────
+\renewcommand{\algorithmicrequire}{\textbf{Entrada:}}
+\renewcommand{\algorithmicensure}{\textbf{Saída:}}
+
+% ── Figuras e Tabelas ───────────────────────────────────────
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{float}
+
+% ── Hiperlinks ──────────────────────────────────────────────
+\usepackage[
+  colorlinks=true,
+  linkcolor=blue!70!black,
+  citecolor=blue!70!black,
+  urlcolor=blue!70!black
+]{hyperref}
+
+% ── Cabeçalho e Rodapé ──────────────────────────────────────
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textit{\docsubtitle}}
+\fancyhead[R]{\small\textit{\docauthor}}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ── Cores ───────────────────────────────────────────────────
+\definecolor{mainblue}{RGB}{30, 80, 160}
+\definecolor{codegray}{RGB}{245, 245, 245}
+\definecolor{codecomment}{RGB}{100, 100, 100}
+\definecolor{codestring}{RGB}{163, 21, 21}
+\definecolor{codekeyword}{RGB}{30, 80, 160}
+
+% ── Estilo de Código (C++) ───────────────────────────────────
+\lstdefinestyle{cppstyle}{
+  language=C++,
+  backgroundcolor=\color{codegray},
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{codekeyword}\bfseries,
+  commentstyle=\color{codecomment}\itshape,
+  stringstyle=\color{codestring},
+  numberstyle=\tiny\color{codecomment},
+  numbers=left,
+  numbersep=8pt,
+  breaklines=true,
+  frame=single,
+  framerule=0pt,
+  rulecolor=\color{codegray},
+  showstringspaces=false,
+  tabsize=2,
+  captionpos=b,
+}
+\lstset{style=cppstyle}
+
+% ── Ambientes de Teorema ─────────────────────────────────────
+\theoremstyle{definition}
+\newtheorem{definition}{Definição}[section]
+\newtheorem{example}{Exemplo}[section]
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{corollary}[theorem]{Corolário}
+\newtheorem{proposition}[theorem]{Proposição}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Observação}
+\newtheorem*{note}{Nota}
+
+% ── Espaçamento ─────────────────────────────────────────────
+\usepackage{setspace}
+\setstretch{1.3}
+
+% ============================================================
+%  METADADOS — altere apenas estas 4 linhas em cada documento
+% ============================================================
+\newcommand{\docauthor}{Gabriel de Souza Dourado}
+\newcommand{\doctitle}{Teoria da Computação}
+\newcommand{\docsubtitle}{Autômatos Finitos Não Determinísticos com transição vazia}
+\newcommand{\docdate}{\today}
+% ============================================================
+
+\begin{document}
+
+% ── Título ───────────────────────────────────────────────────
+\begin{center}
+  {\large \textcolor{mainblue}{\textsc{\docsubtitle}}}\\[0.4em]
+  {\LARGE \textbf{\doctitle}}\\[0.6em]
+  {\small \docauthor \quad·\quad \docdate}
+  \vspace{0.4em}
+  \hrule
+\end{center}
+
+\vspace{1em}
+
+% ── Sumário (descomente se quiser) ───────────────────────────
+% \tableofcontents
+% \newpage
+
+% ------------------------------------------------------------
+\section{Introdução}
+% ------------------------------------------------------------
+
+Um \textbf{Autômato Finito Não Determinístico com Transições Vazias (AFND-$\varepsilon$)}, é um AFND que além do não determinismo, possui transições vazias ($\varepsilon$), ou seja, vai de um estado para outro sem consumir nenhum símbolo do alfabeto. Formalmente, um AFND-$\varepsilon$ é caracterizado por cinco componentes, assim como um AFND:
+
+\begin{enumerate}
+    \item Um conjunto finito de \textbf{estados} denotado $Q$.
+    \item Um conjunto finito de \textbf{símbolos de entrada} denotado por $\Sigma$.
+    \item Uma \textbf{função de transição} $\delta$\footnote{É na função de transição que está a diferença entre um AFND e um AFND-$\varepsilon$.}.
+    \item Um \textbf{estado inicial} $q_0$, estado onde o autômato começa a computação.
+    \item Um subconjunto de $Q$, denotado de $F$, de \textbf{estados de aceitação}.
+\end{enumerate}
+
+\section{Definição}
+
+\begin{definition}[Autômato Finito Não Determinístico]
+É dado pela 5-tupla ordenada:
+
+\[
+M = (Q, \Sigma, \delta, q_0, F),
+\]
+onde:
+
+\begin{itemize}
+    \item $Q$ é um conjunto finito de estados;
+    \item $\Sigma$ é o alfabeto de entrada;
+    \item $\delta : Q \times (\Sigma \cup \{\varepsilon\}) \rightharpoonup 2^{Q}$ é a função de transição total;
+    \item $q_0 \in Q$ é o estado inicial;
+    \item $F \subseteq Q$ é o conjunto de estados de aceitação.
+\end{itemize}
+
+\end{definition}
+
+% ------------------------------------------------------------
+\section{Implementação de um AFND-$\varepsilon$ (Backtracking)}
+% ------------------------------------------------------------
+Vamos adotar a estratégia de \textit{backtracking}, alterando a utilizada para
+o AFND sem transições $\varepsilon$: o algoritmo avança recursivamente pelos
+caminhos de computação do AFND-$\varepsilon$, verificando também os estados
+alcançáveis por transições vazias. Ao encontrar uma configuração sem transição
+definida ou um estado não-aceitador ao fim da palavra, retrocede e explora as
+demais transições disponíveis. Para evitar loops infinitos causados por ciclos
+de $\varepsilon$-transições, o algoritmo mantém um conjunto $V$ de estados já
+visitados via $\varepsilon$ no passo atual. A palavra é aceita se \textbf{algum}
+caminho levar a um estado de aceitação após consumir toda a entrada.
+
+\begin{algorithm}[H]
+  \caption{$\textsc{Busca}(M, w, q, i, V)$}
+  \label{alg:afndEpsBusca}
+  \begin{algorithmic}[1]
+    \Require Um AFND-$\varepsilon$ $M = (Q, \Sigma, \delta, q_0, F)$,
+             onde $\delta : Q \times (\Sigma \cup \{\varepsilon\}) \rightharpoonup 2^{Q}$,
+             uma palavra $w \in \Sigma^*$,
+             um estado $q \in Q$,
+             um índice $i \in \mathbb{N}$ e
+             um conjunto $V \subseteq Q$ de estados visitados por $\varepsilon$
+    \Ensure  \textbf{verdadeiro} se existe um caminho de aceitação,
+             \textbf{falso} caso contrário
+    \If{$i = |w|$}
+      \If{$q \in F$}
+        \State \Return \textbf{verdadeiro}
+      \Else
+        \State \Return \textbf{falso}
+      \EndIf
+    \EndIf
+    \For{cada $q' \in \delta(q,\ w[i])$}
+      \If{$\textsc{Busca}(M, w, q', i + 1, \emptyset)$}
+        \State \Return \textbf{verdadeiro}
+      \EndIf
+    \EndFor
+    \For{cada $q' \in \delta(q,\ \varepsilon)$ tal que $q' \notin V$}
+      \If{$\textsc{Busca}(M, w, q', i, V \cup \{q'\})$}
+        \State \Return \textbf{verdadeiro}
+      \EndIf
+    \EndFor
+    \State \Return \textbf{falso}
+  \end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+  \caption{Simulação de um AFND-$\varepsilon$ com Backtracking}
+  \label{alg:afndEpsBacktracking}
+  \begin{algorithmic}[1]
+    \Require Um AFND-$\varepsilon$ $M = (Q, \Sigma, \delta, q_0, F)$,
+             onde $\delta : Q \times (\Sigma \cup \{\varepsilon\}) \rightharpoonup 2^{Q}$,
+             e uma palavra $w \in \Sigma^*$
+    \Ensure  \textbf{aceita} se $w \in L(M)$, \textbf{rejeita} caso contrário
+    \If{$\textsc{Busca}(M, w, q_0, 0, \emptyset)$}
+      \State \Return \textbf{aceita}
+    \Else
+      \State \Return \textbf{rejeita}
+    \EndIf
+  \end{algorithmic}
+\end{algorithm}
+% ============================================================
+%  REFERÊNCIAS
+% ============================================================
+\newpage
+\begin{thebibliography}{9}
+
+\bibitem{menezes}
+MENEZES, P. B.\@.
+\textit{Linguagens Formais e Autômatos}.
+6.~ed. Porto Alegre: Bookman, 2011.
+
+\bibitem{hopcroft}
+HOPCROFT, J. E.; MOTWANI, R.; ULLMAN, J. D.\@.
+\textit{Introduction to Automata Theory, Languages, and Computation}.
+3.~ed. Boston: Pearson, 2006.
+
+\end{thebibliography}
+
+\end{document}
