@@ -24,7 +24,7 @@ Os arquivos em [`implementations/inputs/`](implementations/inputs/) são entrada
 
 | Arquivo | Linguagem | Tipo | Programa |
 |---|---|---|---|
-| `IN1_AFD_Total.txt` | $L = \{w \in \{a,b\}^* \mid w \text{ termina com } ab\}$ | Total | `AFD_Total.cpp` |
-| `IN2_AFD_Total.txt` | $L = \{w \in \{0,1\}^* \mid w \text{ tem número par de } 0\text{'s}\}$ | Total | `AFD_Total.cpp` |
-| `IN1_AFD_Partial.txt` | $L = \{w \in \{0,1\}^* \mid w \text{ começa e termina com o mesmo símbolo}\}$ | Parcial | `AFD_Partial.cpp` |
-| `IN2_AFD_Partial.txt` | $L = \{w \in \{0,1\}^* \mid w \text{ contém } aa\text{ como palavra}\}$ | Parcial | `AFD_Partial.cpp` |
+| `IN1_AFD_Total.txt` | Palavras sobre {a,b} que terminam com "ab" | Total | `AFD_Total.cpp` |
+| `IN2_AFD_Total.txt` | Palavras sobre {0,1} com número par de 0's | Total | `AFD_Total.cpp` |
+| `IN1_AFD_Parcial.txt` | Palavras sobre {a,b} que começam e terminam com o mesmo símbolo | Parcial | `AFD_Parcial.cpp` |
+| `IN2_AFD_Parcial.txt` | Palavras sobre {a,b} que contêm "aa" como substring | Parcial | `AFD_Parcial.cpp` |

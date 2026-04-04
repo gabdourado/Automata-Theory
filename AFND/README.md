@@ -24,5 +24,5 @@ Os arquivos em [`implementations/inputs/`](implementations/inputs/) são entrada
 
 | Arquivo | Linguagem | Tipo | Programa |
 |---|---|---|---|
-| `IN1_AFND_BT.txt` | $L = \{w \in \{a,b\}^* \mid \text{ o penúltimo símbolo de } w \text{ é } a\}$ | Total | `AFND_BT.cpp` |
-| `IN1_AFNDE_BT.txt` | $L = \{a^{n} \mid n \geq 0\} \cup \{b^{n} \mid n \geq 0\}$ | Parcial | `AFNDE_BT.cpp` |
+| `IN1_AFND_BT.txt` | Palavras sobre {a,b} onde o penúltimo símbolo é "a" | Backtracking | `AFND_BT.cpp` |
+| `IN1_AFNDE_BT.txt` | Palavras formadas só por a's ou só por b's (incluindo vazia) | Backtracking + ε | `AFNDE_BT.cpp` |
