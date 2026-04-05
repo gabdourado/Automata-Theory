@@ -26,3 +26,4 @@ Os arquivos em [`implementations/inputs/`](implementations/inputs/) são entrada
 |---|---|---|---|
 | `IN1_AFND_BT.txt` | Palavras sobre {a,b} onde o penúltimo símbolo é "a" | Backtracking | `AFND_BT.cpp` |
 | `IN1_AFNDE_BT.txt` | Palavras formadas só por a's ou só por b's (incluindo vazia) | Backtracking + ε | `AFNDE_BT.cpp` |
+| `IN2_AFNDE_BT.txt` | Palavras sobre {a,b} com quantidade par de a's | Backtracking + ε | `AFNDE_BT.cpp` |
