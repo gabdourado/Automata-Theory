@@ -214,11 +214,11 @@ A função $\delta$ de transição é definida da seguinte forma: \\
 \end{center}
 
 \subsection{Algoritmo}
-O procedimento do algoritmo pode ser descrito da seguinte forma:
+O procedimento está descrito no algoritmo~\ref{alg:converte1}:
 
 \begin{algorithm}[H]
   \caption{$\textsc{Converte}(G)$}
-  \label{alg:converte}
+  \label{alg:converte1}
   \begin{algorithmic}[1]
     \Require Uma GLUD $G = (V, T, P, S)$
     \Ensure Um AFND-$\varepsilon$ $M = (Q, \Sigma, \delta, q_0, F)$,
@@ -239,6 +239,41 @@ O procedimento do algoritmo pode ser descrito da seguinte forma:
         \State $\delta(A,\, \varepsilon) \leftarrow \delta(A,\, \varepsilon) \cup \{B\}$
       \ElsIf{$p$ é da forma $A \rightarrow \varepsilon$}
         \State $\delta(A,\, \varepsilon) \leftarrow \delta(A,\, \varepsilon) \cup \{q_f\}$
+      \EndIf
+    \EndFor
+
+    \State \Return $M = (Q,\, \Sigma,\, \delta,\, q_0,\, F)$
+  \end{algorithmic}
+\end{algorithm}
+
+\newpage
+
+\section{Adaptação do Algoritmo~\ref{alg:converte1}}
+No algoritmo anterior, só existe um estado de aceitação, assim, para cada derivação do tipo $A \rightarrow \varepsilon$, onde $A \in V$, criamos uma transição do vazia desnecessária ($\delta(A, \epsilon) = \{q_f\}$). Podemos mudar essa abordagem, transfomando $A$ em um estado de aceitação. O algoritmo~\ref{alg:converte2} mostra isso:
+
+\begin{algorithm}[H]
+  \caption{$\textsc{Converte}(G)$ (adaptado)}
+  \label{alg:converte2}
+  \begin{algorithmic}[1]
+    \Require Uma GLUD $G = (V, T, P, S)$
+    \Ensure Um AFND-$\varepsilon$ $M = (Q, \Sigma, \delta, q_0, F)$,
+             onde $\delta : Q \times (\Sigma \cup \{\varepsilon\}) \rightharpoonup 2^Q$
+
+    \State $q_f \leftarrow$ novo estado; \quad $Q \leftarrow V \cup \{q_f\}$
+    \State $\Sigma \leftarrow T$
+    \State $q_0 \leftarrow S$
+    \State $F \leftarrow \{q_f\}$
+    \State $\delta \leftarrow \emptyset$
+
+    \For{cada produção $p \in P$}
+      \If{$p$ é da forma $A \rightarrow aB$}
+        \State $\delta(A,\, a) \leftarrow \delta(A,\, a) \cup \{B\}$
+      \ElsIf{$p$ é da forma $A \rightarrow a$}
+        \State $\delta(A,\, a) \leftarrow \delta(A,\, a) \cup \{q_f\}$
+      \ElsIf{$p$ é da forma $A \rightarrow B$}
+        \State $\delta(A,\, \varepsilon) \leftarrow \delta(A,\, \varepsilon) \cup \{B\}$
+      \ElsIf{$p$ é da forma $A \rightarrow \varepsilon$}
+        \State $F \gets F \cup {A}$
       \EndIf
     \EndFor
 
