@@ -1,0 +1,267 @@
+% ============================================================
+%  template.tex — Notas Acadêmicas
+%  Autor: <Gabriel de Souza Dourado>
+% ============================================================
+
+\documentclass[12pt, a4paper]{article}
+
+% ── Codificação e Língua ────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+
+% ── Tipografia ──────────────────────────────────────────────
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% ── Margens ─────────────────────────────────────────────────
+\usepackage[
+  top=2.5cm, bottom=2.5cm,
+  left=2.8cm, right=2.8cm
+]{geometry}
+\setlength{\skip\footins}{1.5em}
+
+% ── Matemática ──────────────────────────────────────────────
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+
+% ── Algoritmos e Código ─────────────────────────────────────
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% ── Pseudocódigo ─────────────────────────────────────
+\renewcommand{\algorithmicrequire}{\textbf{Entrada:}}
+\renewcommand{\algorithmicensure}{\textbf{Saída:}}
+
+% ── Figuras e Tabelas ───────────────────────────────────────
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{float}
+
+% ── Hiperlinks ──────────────────────────────────────────────
+\usepackage[
+  colorlinks=true,
+  linkcolor=blue!70!black,
+  citecolor=blue!70!black,
+  urlcolor=blue!70!black
+]{hyperref}
+
+% ── Cabeçalho e Rodapé ──────────────────────────────────────
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textit{\docsubtitle}}
+\fancyhead[R]{\small\textit{\docauthor}}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ── Cores ───────────────────────────────────────────────────
+\definecolor{mainblue}{RGB}{30, 80, 160}
+\definecolor{codegray}{RGB}{245, 245, 245}
+\definecolor{codecomment}{RGB}{100, 100, 100}
+\definecolor{codestring}{RGB}{163, 21, 21}
+\definecolor{codekeyword}{RGB}{30, 80, 160}
+
+% ── Estilo de Código (C++) ───────────────────────────────────
+\lstdefinestyle{cppstyle}{
+  language=C++,
+  backgroundcolor=\color{codegray},
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{codekeyword}\bfseries,
+  commentstyle=\color{codecomment}\itshape,
+  stringstyle=\color{codestring},
+  numberstyle=\tiny\color{codecomment},
+  numbers=left,
+  numbersep=8pt,
+  breaklines=true,
+  frame=single,
+  framerule=0pt,
+  rulecolor=\color{codegray},
+  showstringspaces=false,
+  tabsize=2,
+  captionpos=b,
+}
+\lstset{style=cppstyle}
+
+% ── Ambientes de Teorema ─────────────────────────────────────
+\theoremstyle{definition}
+\newtheorem{definition}{Definição}[section]
+\newtheorem{example}{Exemplo}[section]
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{corollary}[theorem]{Corolário}
+\newtheorem{proposition}[theorem]{Proposição}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Observação}
+\newtheorem*{note}{Nota}
+
+% ── Espaçamento ─────────────────────────────────────────────
+\usepackage{setspace}
+\setstretch{1.3}
+
+% ============================================================
+%  METADADOS — altere apenas estas 4 linhas em cada documento
+% ============================================================
+\newcommand{\docauthor}{Gabriel de Souza Dourado}
+\newcommand{\doctitle}{Teoria da Computação}
+\newcommand{\docsubtitle}{Gramáticas Regulares}
+\newcommand{\docdate}{\today}
+% ============================================================
+
+\begin{document}
+
+% ── Título ───────────────────────────────────────────────────
+\begin{center}
+  {\large \textcolor{mainblue}{\textsc{\docsubtitle}}}\\[0.4em]
+  {\LARGE \textbf{\doctitle}}\\[0.6em]
+  {\small \docauthor \quad·\quad \docdate}
+  \vspace{0.4em}
+  \hrule
+\end{center}
+
+\vspace{1em}
+
+% ── Sumário (descomente se quiser) ───────────────────────────
+% \tableofcontents
+% \newpage
+
+% ------------------------------------------------------------
+\section{Introdução}
+% ------------------------------------------------------------
+Uma \textbf{Gramática de Chomsky} consiste em um conjunto de regras de produção que, quando aplicadas de forma sucessiva, geram palavras. O conjunto de todas as palavras que podem ser geradas por uma gramática define uma linguagem.
+
+\section{Definição}
+
+\begin{definition}[Gramática de Chomsky]
+Uma \textbf{Gramática de Chomsky} é definida por uma 4-tupla ordenada:
+
+\[
+G = (V, T, P, S)
+\]
+
+onde:
+
+\begin{itemize}
+    \item \(V\) é um conjunto finito de símbolos não-terminais.
+    \item \(T\) é um conjunto finito de símbolos terminais, com \(V \cap T = \emptyset\).
+    \item \(P \subseteq (V \cup T)^{+} \times (V \cup T)^*\) é um conjunto finito de produções.
+    \item \(S \in V\) é o símbolo inicial da gramática.
+\end{itemize} 
+\end{definition}
+    
+\section{Gramáticas Regulares}
+
+Uma gramática é \textbf{Regular} se atender, e unicamente atender, a uma das seguintes restrições:
+
+\begin{definition}[Gramática Linear à Direita]
+Dado $A, B \in V$ e $\omega \in T^*$, seja $G = (V, T, P, S)$, se toda produção tem a forma:
+\[
+A \rightarrow \omega B \quad \text{ou} \quad A \rightarrow \omega
+\]
+ela é dita uma Gramática Linear à Direita. 
+\end{definition}
+
+\begin{definition}[Gramática Linear à Esquerda]
+Dado $A, B \in V$ e $\omega \in T^*$, seja $G = (V, T, P, S)$, se toda produção tem a forma:
+\[
+A \rightarrow B \omega \quad \text{ou} \quad A \rightarrow \omega
+\]
+ela é dita uma Gramática Linear à Esquerda. 
+\end{definition}
+
+
+\begin{definition}[Gramática Linear Unitária à Direita]
+Dado $A, B \in V$ e $\omega \in T^*$, seja $G = (V, T, P, S)$, se toda produção tem a forma:
+\[
+A \rightarrow \omega B \quad \text{ou} \quad A \rightarrow \omega, \quad |\omega| \le 1
+\]
+ela é dita uma Gramática Linear Unitária à Direita. 
+\end{definition}
+
+\begin{definition}[Gramática Linear Unitária à Esquerda]
+Dado $A, B \in V$ e $\omega \in T^*$, seja $G = (V, T, P, S)$, se toda produção tem a forma:
+\[
+A \rightarrow B \omega \quad \text{ou} \quad A \rightarrow \omega, \quad |\omega| \le 1
+\]
+ela é dita uma Gramática Linear Unitária à Esquerda. 
+\end{definition}
+
+\section{Conversão de GLUD para AFND-$\varepsilon$}
+
+Vamos converte uma \textbf{Gramática Linear Unitária a Direita (GLUD)} em um \textbf{Autômato Finito Não Determinístico com transições vazias (AFND-$\epsilon$)}.
+
+\subsection{Descrição Geral}
+
+Dada uma GLUD $G = (V, T, P, S)$, deseja-se construir um AFND-$\epsilon$ $A = (Q, \Sigma, \delta, q_{0}, F)$. Por definição, consideramos as seguintes igualdades:
+\begin{center}
+    $Q = V \cup \{q_f\}$, $\Sigma = T$ $q_{0} = S$ e $F = \{q_f\}$.
+\end{center}
+A função $\delta$ de transição é definida da seguinte forma: \\
+\begin{center}
+\begin{tabular}{c|c}
+  \textbf{Regra de Produção} & \textbf{Função de Transição $\delta$} \\\hline
+  $A \rightarrow \epsilon$ & $\delta(A, \epsilon) = \{q_f\}$ \\
+  $A \rightarrow \sigma$ & $\delta(A, \sigma) = \{q_f\}$ \\
+  $A \rightarrow B$ & $\delta(A, \epsilon) = \{B\}$ \\
+  $A \rightarrow \sigma B$ & $\delta(A, \sigma) = \{B\}$ \\
+\end{tabular}
+\end{center}
+
+\subsection{Algoritmo}
+O procedimento do algoritmo pode ser descrito da seguinte forma:
+
+\begin{algorithm}[H]
+  \caption{$\textsc{Converte}(G)$}
+  \label{alg:converte}
+  \begin{algorithmic}[1]
+    \Require Uma GLUD $G = (V, T, P, S)$
+    \Ensure Um AFND-$\varepsilon$ $M = (Q, \Sigma, \delta, q_0, F)$,
+             onde $\delta : Q \times (\Sigma \cup \{\varepsilon\}) \rightharpoonup 2^Q$
+
+    \State $q_f \leftarrow$ novo estado; \quad $Q \leftarrow V \cup \{q_f\}$
+    \State $\Sigma \leftarrow T$
+    \State $q_0 \leftarrow S$
+    \State $F \leftarrow \{q_f\}$
+    \State $\delta \leftarrow \emptyset$
+
+    \For{cada produção $p \in P$}
+      \If{$p$ é da forma $A \rightarrow aB$}
+        \State $\delta(A,\, a) \leftarrow \delta(A,\, a) \cup \{B\}$
+      \ElsIf{$p$ é da forma $A \rightarrow a$}
+        \State $\delta(A,\, a) \leftarrow \delta(A,\, a) \cup \{q_f\}$
+      \ElsIf{$p$ é da forma $A \rightarrow B$}
+        \State $\delta(A,\, \varepsilon) \leftarrow \delta(A,\, \varepsilon) \cup \{B\}$
+      \ElsIf{$p$ é da forma $A \rightarrow \varepsilon$}
+        \State $\delta(A,\, \varepsilon) \leftarrow \delta(A,\, \varepsilon) \cup \{q_f\}$
+      \EndIf
+    \EndFor
+
+    \State \Return $M = (Q,\, \Sigma,\, \delta,\, q_0,\, F)$
+  \end{algorithmic}
+\end{algorithm}
+
+% ============================================================
+%  REFERÊNCIAS
+% ============================================================
+\newpage
+\begin{thebibliography}{9}
+
+\bibitem{menezes}
+MENEZES, P. B.\@.
+\textit{Linguagens Formais e Autômatos}.
+6.~ed. Porto Alegre: Bookman, 2011.
+
+\bibitem{hopcroft}
+HOPCROFT, J. E.; MOTWANI, R.; ULLMAN, J. D.\@.
+\textit{Introduction to Automata Theory, Languages, and Computation}.
+3.~ed. Boston: Pearson, 2006.
+
+\end{thebibliography}
+
+\end{document}
