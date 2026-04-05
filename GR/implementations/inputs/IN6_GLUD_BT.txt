@@ -1,0 +1,23 @@
+3 2
+S A B
+a b
+7
+S -> aA
+S -> bB
+S -> -
+A -> bB
+A -> -
+B -> aA
+B -> -
+S
+ab
+ba
+aba
+bab
+abab
+baba
+aa
+bb
+abb
+baa
+fim

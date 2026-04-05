@@ -1,0 +1,19 @@
+2 2
+S A
+a b
+5
+S -> bS
+S -> aA
+S -> -
+A -> aA
+A -> -
+S
+b
+a
+aa
+bba
+bbaa
+ab
+aab
+ba
+fim
