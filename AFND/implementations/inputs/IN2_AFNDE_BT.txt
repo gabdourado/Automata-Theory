@@ -1,14 +1,13 @@
-3 2
-0 1 2
+2 2
+0 1
 a b
-5
+4
 0 a 1
 1 a 0
 0 b 0
 1 b 1
-0 - 2
 0
-1 2
+1 0
 aa
 aabb
 abab
@@ -21,4 +20,5 @@ ab
 ba
 aba
 bbb
+&
 fim

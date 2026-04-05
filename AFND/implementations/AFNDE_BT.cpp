@@ -50,7 +50,8 @@ bool search(const AFND& afnd, const std::string& w, int q, int i, std::set<int> 
 }
 
 bool simulate(const AFND& afnd, const std::string& w) {
-    if (search(afnd, w, afnd.initial, 0, {})) 
+    std::string word = (w == "&") ? "" : w;
+    if (search(afnd, word, afnd.initial, 0, {})) 
         return 1;
     else
         return 0;
