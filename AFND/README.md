@@ -22,11 +22,11 @@ Os arquivos de entrada devem seguir exatamente a ordem apresentada, uma informa�
 <Σ>                  símbolos separados por espaço            e.g.: a b
 <|δ|>                número de transições                     e.g.: 5
 <transições>         uma por linha, no formato q a p          e.g.: 0 a 1
-...
+...                  use o símbolo & para transições vazias   e.g.: 0 & 2
 <q0>                 estado inicial                           e.g.: 0
 <|F|> <F>            número de estados finais e os estados    e.g.: 1 2
 <palavras>           uma por linha                            e.g.: aa
-...
+...                  a palavra vazia também é denotada por &  e.g.: &
 <fim>                string que indica o fim dos testes
 ```
 
@@ -44,5 +44,5 @@ Os arquivos em [`implementations/inputs/`](implementations/inputs/) são entrada
 | Arquivo | Linguagem | Tipo | Programa |
 |---|---|---|---|
 | `IN1_AFND_BT.txt` | Palavras sobre {a,b} onde o penúltimo símbolo é "a" | Backtracking | `AFND_BT.cpp` |
-| `IN1_AFNDE_BT.txt` | Palavras formadas só por a's ou só por b's | Backtracking + ε | `AFNDE_BT.cpp` |
+| `IN1_AFNDE_BT.txt` | Palavras formadas só por a's ou só por b's (inclusive a cadeia vazia) | Backtracking + ε | `AFNDE_BT.cpp` |
 | `IN2_AFNDE_BT.txt` | Palavras sobre {a,b} com quantidade par de a's | Backtracking + ε | `AFNDE_BT.cpp` |
