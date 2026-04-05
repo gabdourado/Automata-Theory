@@ -45,7 +45,7 @@ Para funcionamento do programa, algumas convenções devem ser adotadas — idio
 
 ## Testes
 
-Os arquivos em [`implementations/inputs/`](implementations/inputs/) são entradas de teste, nomeadas conforme a linguagem reconhecida:
+Os arquivos em [`implementations/inputs/`](implementations/inputs/) são entradas de teste, um para cada linguagem:
 
 | Arquivo | Linguagem  | Programa |
 |---|---|---|
