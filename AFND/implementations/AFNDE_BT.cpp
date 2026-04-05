@@ -39,8 +39,19 @@ struct NFA {
 };
 
 bool search(const NFA& nfa, const std::string& w, int q, int i, std::set<int> V) {
-    if (i == (int)w.length())
-        return nfa.accepting.count(q) > 0;
+    if (i == (int)w.length()) {
+        if (nfa.accepting.count(q) > 0) return true;
+
+        if (nfa.delta.count({q, '-'}) > 0)
+            for (int next : nfa.delta.at({q, '-'}))
+                if (V.count(next) == 0) {
+                    std::set<int> u = V;
+                    u.insert(next);
+                    if (search(nfa, w, next, i, u))
+                        return true;
+                }
+        return false;
+    }
 
     if (nfa.delta.count({q, w[i]}) > 0)
         for (int next : nfa.delta.at({q, w[i]}))
