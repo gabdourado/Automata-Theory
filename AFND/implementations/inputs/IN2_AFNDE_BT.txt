@@ -9,7 +9,6 @@ a b
 0 - 2
 0
 1 2
-12
 aa
 aabb
 abab
@@ -22,3 +21,4 @@ ab
 ba
 aba
 bbb
+fim

@@ -8,7 +8,6 @@ a b
 2 b 2
 0
 2 1 2
-8
 a
 b
 aa
@@ -17,3 +16,4 @@ ab
 ba
 aaa
 bbb
+fim

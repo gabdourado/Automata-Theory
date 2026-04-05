@@ -1,28 +1,7 @@
 /*
     Autor: Gabriel de Souza Dourado
     Repositório: Automata Theory
-    Prática: AFND com transições vazias com backtracking
-    
-    Instruções:
-    
-    1. Digitar o número de estados |Q| e o número de símbolos |Σ|
-    
-    2. Digitar os estados de Q, separados por espaço (e.g.: 1 2 3)
-    
-    3. Digitar os símbolos de Σ, separados por espaço (e.g.: a b)
-    
-    4. Digitar o número de transições δ (e.g.: 4)
-    
-    5. Digitar as transições uma por linha (e.g.: 1 a 2) representando δ(1, a) = 2 e 
-    use um traço (-) para transições vazias (e.g.: 2 - 3) representando δ(2, ε) = 3
-    
-    5. Digitar o estado inicial q0 (e.g.: 1)
-    
-    6. Digitar o número de estados de aceitação e depois os estados (e.g.: 2 1 3)
-    
-    7. Digitar o número de testes 
-    
-    8. Digitar as palavras a serem processadas uma por linha (e.g.: aba)
+    Prática: Simulando AFND com transições vazias com backtracking    
 */
 
 #include <iostream>
@@ -30,7 +9,7 @@
 #include <set>
 #include <string>
 
-struct NFA {
+struct AFND {
     std::set<int>                                 states;
     std::set<char>                                alphabet;
     std::map<std::pair<int,char>, std::set<int>>  delta;
@@ -38,84 +17,77 @@ struct NFA {
     std::set<int>                                 accepting;
 };
 
-bool search(const NFA& nfa, const std::string& w, int q, int i, std::set<int> V) {
+bool search(const AFND& afnd, const std::string& w, int q, int i, std::set<int> V) {
     if (i == (int)w.length()) {
-        if (nfa.accepting.count(q) > 0) return true;
+        if (afnd.accepting.count(q) > 0) return true;
 
-        if (nfa.delta.count({q, '-'}) > 0)
-            for (int next : nfa.delta.at({q, '-'}))
+        if (afnd.delta.count({q, '-'}) > 0)
+            for (int next : afnd.delta.at({q, '-'}))
                 if (V.count(next) == 0) {
                     std::set<int> u = V;
                     u.insert(next);
-                    if (search(nfa, w, next, i, u))
+                    if (search(afnd, w, next, i, u))
                         return true;
                 }
         return false;
     }
 
-    if (nfa.delta.count({q, w[i]}) > 0)
-        for (int next : nfa.delta.at({q, w[i]}))
-            if (search(nfa, w, next, i + 1, {}))
+    if (afnd.delta.count({q, w[i]}) > 0)
+        for (int next : afnd.delta.at({q, w[i]}))
+            if (search(afnd, w, next, i + 1, {}))
                 return true;
 
-    if (nfa.delta.count({q, '-'}) > 0)
-        for (int next : nfa.delta.at({q, '-'}))
+    if (afnd.delta.count({q, '-'}) > 0)
+        for (int next : afnd.delta.at({q, '-'}))
             if (V.count(next) == 0) {
                 std::set<int> u = V;
                 u.insert(next);
-                if (search(nfa, w, next, i, u))
+                if (search(afnd, w, next, i, u))
                     return true;
             }
 
     return false;
 }
 
-bool simulate(const NFA& nfa, const std::string& w) {
-    if (search(nfa, w, nfa.initial, 0, {})) 
+bool simulate(const AFND& afnd, const std::string& w) {
+    if (search(afnd, w, afnd.initial, 0, {})) 
         return 1;
     else
         return 0;
 }
 
 int main() {
-    NFA nfa;
-    int n_states, n_symbols;
-
-    std::cin >> n_states >> n_symbols;
-
-    for (int i = 0; i < n_states; i++) {
+    AFND afnd;
+    
+    int s_st, n_sy; std::cin >> s_st >> n_sy;
+    for (int i = 0; i < s_st; i++) {
         int s; std::cin >> s;
-        nfa.states.insert(s);
+        afnd.states.insert(s);
     }
 
-    for (int i = 0; i < n_symbols; i++) {
+    for (int i = 0; i < n_sy; i++) {
         char c; std::cin >> c;
-        nfa.alphabet.insert(c);
+        afnd.alphabet.insert(c);
     }
 
     int t; std::cin >> t;
     for (int i = 0; i < t; i++) {
         int p, q; char sym;
         std::cin >> p >> sym >> q;
-        nfa.delta[{p, sym}].insert(q);
+        afnd.delta[{p, sym}].insert(q);
     }
 
-    std::cin >> nfa.initial;
+    std::cin >> afnd.initial;
 
     int f; std::cin >> f;
     for (int i = 0; i < f; i++) {
         int s; std::cin >> s;
-        nfa.accepting.insert(s);
+        afnd.accepting.insert(s);
     }
 
-    int num_tests;
-
-    std::cin >> num_tests; 
-
-    for (int i = 0; i < num_tests; i++) {
-        std::string w;
-        std::cin >> w;
-        std::cout << (simulate(nfa, w) ? "aceita:" : "rejeita:");
+    std::string w;
+    while (std::cin >> w && w != "fim") {
+        std::cout << (simulate(afnd, w) ? "aceita:" : "rejeita:");
         std::cout << " " << w << "\n";
     }
 
