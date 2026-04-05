@@ -19,7 +19,8 @@ struct AFD {
 
 bool simulate(const AFD& afd, const std::string& w) {
     int current = afd.initial;
-    for (char c : w)
+    std::string word = (w == "&") ? "" : w; 
+    for (char c : word)
         try {
             current = afd.delta.at({current, c});
         } catch (const std::out_of_range&) {

@@ -17,4 +17,5 @@ b
 ab
 ba
 aba
+&
 fim

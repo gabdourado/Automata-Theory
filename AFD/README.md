@@ -23,7 +23,7 @@ Os programas em [`implementations/`](implementations/) aceitam um AFD descrito e
 <q0>                    estado inicial                           e.g.: 0
 <|F|> <F>               número de estados finais e os estados    e.g.: 1 2
 <palavras>              uma por linha                            e.g.: aa
-...
+...                     a palavra vazia é denotada por &         e.g.: &
 <fim>                   string que indica o fim dos testes
 ```
 
@@ -39,7 +39,7 @@ Os programas em [`implementations/`](implementations/) aceitam um AFD descrito e
 <q0>                 estado inicial                           e.g.: 0
 <|F|> <F>            número de estados finais e os estados    e.g.: 1 2
 <palavras>           uma por linha                            e.g.: aa
-...
+...                  a palavra vazia é denotada por &         e.g.: &
 <fim>                string que indica o fim dos testes
 ```
 

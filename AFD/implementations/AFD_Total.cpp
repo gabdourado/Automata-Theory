@@ -19,7 +19,8 @@ struct AFD {
 
 bool simulate(const AFD& afd, const std::string w) {
     int current = afd.initial;
-    for (char c : w)
+    std::string word = (w == "&") ? "" : w;
+    for (char c : word)
         current = afd.delta.at({current, c});
     return afd.accepting.count(current) > 0;
 }
