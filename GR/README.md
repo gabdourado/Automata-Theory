@@ -1,4 +1,4 @@
-# AFND — Teoria, Implementações e Testes
+# GLUD — Teoria, Implementações e Testes
 
 ## Teoria
 
