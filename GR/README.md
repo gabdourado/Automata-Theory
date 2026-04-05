@@ -24,7 +24,7 @@ O arquivo de entrada deve seguir exatamente a ordem abaixo, uma informação por
 ...                                                            e.g.: S -> b
 <S>                  símbolo inicial                           e.g.: S
 <palavras>           uma por linha                             e.g.: ab
-...                                                            e.g.: ba
+...                  a palavra vazia é denotada por &          e.g.: &
 <fim>                string que indica o fim dos testes
 ```
 
@@ -41,7 +41,8 @@ Para funcionamento do programa, algumas convenções devem ser adotadas — idio
 ### Descrição dos Arquivos
 | Arquivo | Descrição |
 |---|---|
-| `GLUD_BT.cpp` | Simula GLUD convertendo para um AFND-ε e usando Backtracking |
+| `GLUD_BT1.cpp` | Simula GLUD convertendo para um AFND-ε e usando Backtracking (Algoritmo 1) |
+| `GLUD_BT2.cpp` | Simula GLUD convertendo para um AFND-ε e usando Backtracking (Algoritmo 2) |
 
 ## Testes
 
