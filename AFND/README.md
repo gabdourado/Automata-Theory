@@ -5,7 +5,7 @@
 Em [`notes/`](notes/) estão as anotações sobre Autômatos Finitos Não Determinísticos, cobrindo:
 
 - AFND tradicionais
-- AFDND com transições vazias
+- AFND com transições vazias
 
 Incluindo definições formais e pseudocódigos.
 
