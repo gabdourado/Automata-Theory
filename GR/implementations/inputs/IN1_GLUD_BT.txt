@@ -1,0 +1,23 @@
+2 2
+S F
+a b
+3
+S -> aS
+S -> bS
+S -> b
+S
+b
+ab
+bb
+aab
+abb
+bab
+bbb
+aabb
+abab
+abbb
+a
+aa
+ba
+aba
+fim
