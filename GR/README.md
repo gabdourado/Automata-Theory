@@ -35,7 +35,7 @@ Para funcionamento do programa, algumas convenções devem ser adotadas — idio
 1. Use letras maiúsculas para produções (e.g.: `A, B, C`)
 2. Se o alfabeto for composto por letras, use minúsculas (e.g.: `a, b, c`)
 3. Por ser uma GLUD, sempre escreva no formato padrão (e.g.: `A → aB`)
-4. Use o símbolo `-` no caso de uma produção vazia (e.g.: `A → -`)
+4. Use o símbolo `&` no caso de uma produção vazia (e.g.: `A → &`)
 
 
 ### Descrição dos Arquivos

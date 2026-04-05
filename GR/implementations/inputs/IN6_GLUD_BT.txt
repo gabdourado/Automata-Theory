@@ -4,11 +4,11 @@ a b
 7
 S -> aA
 S -> bB
-S -> -
+S -> &
 A -> bB
-A -> -
+A -> &
 B -> aA
-B -> -
+B -> &
 S
 ab
 ba
@@ -20,4 +20,5 @@ aa
 bb
 abb
 baa
+&
 fim

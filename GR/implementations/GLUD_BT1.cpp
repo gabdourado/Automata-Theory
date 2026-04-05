@@ -46,7 +46,7 @@ AFND GLUD_to_AFND(const GLUD& glud) {
 
     for (const auto& [left_prod, prods] : glud.productions) {
         for(const auto& [terminal, non_terminal]: prods) {
-            if(non_terminal != '-') 
+            if(non_terminal != '&') 
                 afnd.delta[{stateId[left_prod], terminal}].insert(stateId[non_terminal]);
             else 
                 afnd.delta[{stateId[left_prod], terminal}].insert(finalState);
@@ -59,8 +59,8 @@ bool search(const AFND& afnd, const std::string& w, int q, int i, std::set<int> 
     if (i == (int)w.length()) {
         if (afnd.accepting.count(q) > 0) return true;
 
-        if (afnd.delta.count({q, '-'}) > 0)
-            for (int next : afnd.delta.at({q, '-'}))
+        if (afnd.delta.count({q, '&'}) > 0)
+            for (int next : afnd.delta.at({q, '&'}))
                 if (V.count(next) == 0) {
                     std::set<int> u = V;
                     u.insert(next);
@@ -76,8 +76,8 @@ bool search(const AFND& afnd, const std::string& w, int q, int i, std::set<int> 
             if (search(afnd, w, next, i + 1, {}))
                 return true;
 
-    if (afnd.delta.count({q, '-'}) > 0)
-        for (int next : afnd.delta.at({q, '-'}))
+    if (afnd.delta.count({q, '&'}) > 0)
+        for (int next : afnd.delta.at({q, '&'}))
             if (V.count(next) == 0) {
                 std::set<int> u = V;
                 u.insert(next);
@@ -89,7 +89,8 @@ bool search(const AFND& afnd, const std::string& w, int q, int i, std::set<int> 
 }
 
 bool simulate(const AFND& afnd, const std::string& w) {
-    if (search(afnd, w, afnd.initial, 0, {})) 
+    std::string word = (w == "&") ? "" : w;
+    if (search(afnd, word, afnd.initial, 0, {})) 
         return 1;
     else
         return 0;
@@ -114,13 +115,13 @@ int main() {
         char lp; std::string arrow, rp;
         std::cin >> lp >> arrow >> rp;
         
-        if(rp == "-")
-            glud.productions[lp].insert({'-', '-'});
+        if(rp == "&")
+            glud.productions[lp].insert({'&', '&'});
         else if (rp.size() == 1) {
            if (isupper(rp[0]))
-                glud.productions[lp].insert({'-', rp[0]});
+                glud.productions[lp].insert({'&', rp[0]});
             else 
-                glud.productions[lp].insert({rp[0], '-'});
+                glud.productions[lp].insert({rp[0], '&'});
         } else
             glud.productions[lp].insert({rp[0], rp[1]});
     }

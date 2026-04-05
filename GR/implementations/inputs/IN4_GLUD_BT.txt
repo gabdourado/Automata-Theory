@@ -8,7 +8,7 @@ S -> aA
 A -> bB
 B -> aB
 B -> bB
-B -> -
+B -> &
 S
 ab
 aab
@@ -22,4 +22,5 @@ a
 bb
 aa
 bba
+&
 fim
