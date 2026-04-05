@@ -49,7 +49,10 @@ Os arquivos em [`implementations/inputs/`](implementations/inputs/) são entrada
 
 | Arquivo | Linguagem  | Programa |
 |---|---|---|
-| `IN1_GLUD_BT.txt` | Palavras sobre {a,b} terminadas em "b" | `GLUD_BT.cpp` |
-| `IN2_GLUD_BT.txt` | Palavras sobre {a,b} com quantidade par de a's | `GLUD_BT.cpp` |
-| `IN3_GLUD_BT.txt` | Palavras sobre {0,1} que começam e terminam com mesmo símbolo | `GLUD_BT.cpp` |
-| `IN4_GLUD_BT.txt` | Palavras sobre {a,b} que contém "ab" como substring | `GLUD_BT.cpp` |
+| `IN1_GLUD_BT.txt` | Palavras sobre {a,b} terminadas em "b" | `GLUD_BT1.cpp` ou `GLUD_BT2.cpp`|
+| `IN2_GLUD_BT.txt` | Palavras sobre {a,b} com quantidade par de a's | `GLUD_BT1.cpp` ou `GLUD_BT2.cpp` |
+| `IN3_GLUD_BT.txt` | Palavras sobre {0,1} que começam e terminam com mesmo símbolo | `GLUD_BT1.cpp` ou `GLUD_BT2.cpp` |
+| `IN4_GLUD_BT.txt` | Palavras sobre {a,b} que contém "ab" como substring | `GLUD_BT1.cpp` ou `GLUD_BT2.cpp` |
+| `IN5_GLUD_BT.txt` | Palavras sobre {a,b} que terminam com "aa" | `GLUD_BT1.cpp` ou `GLUD_BT2.cpp` |
+| `IN6_GLUD_BT.txt` | Palavras sobre {a,b} que não possuim dois símbolos consecutivos iguais | `GLUD_BT1.cpp` ou `GLUD_BT2.cpp` |
+| `IN7_GLUD_BT.txt` | Palavras sobre {a,b} que não contém "ab" como substring | `GLUD_BT1.cpp` ou `GLUD_BT2.cpp` |
