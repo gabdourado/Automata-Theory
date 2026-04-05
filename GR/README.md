@@ -5,7 +5,7 @@
 Em [`notes/`](notes/) estão as anotações sobre Gramáticas Regulares, cobrindo:
 
 - Definição de GR
-- Conversão de GLUD para AFND-$\varepsilon$
+- Conversão de GLUD para AFND-ε
 
 ## Implementações
 
@@ -41,7 +41,7 @@ Para funcionamento do programa, algumas convenções devem ser adotadas — idio
 ### Descrição dos Arquivos
 | Arquivo | Descrição |
 |---|---|
-| `GLUD_BT.cpp` | Simula GLUD convertendo para um AFND-$\varepsilon$ e usando Backtracking |
+| `GLUD_BT.cpp` | Simula GLUD convertendo para um AFND-ε e usando Backtracking |
 
 ## Testes
 
