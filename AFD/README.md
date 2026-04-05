@@ -11,7 +11,25 @@ Incluindo definições formais e pseudocódigos.
 
 ## Implementações
 
-Os programas em [`implementations/`](implementations/) aceitam um AFD descrito em arquivo de texto e simulam sua execução:
+Os programas em [`implementations/`](implementations/) aceitam um AFD descrito em arquivo de texto e simulam sua execução.
+
+### Formato de entrada
+
+O arquivo de entrada deve seguir exatamente a ordem abaixo, uma informação por linha:
+```
+<|Q|> <|Σ|>          número de estados e símbolos             e.g.: 3 2
+<Q>                  estados separados por espaço             e.g.: 0 1 2
+<Σ>                  símbolos separados por espaço            e.g.: a b
+<|δ|>                número de transições                     e.g.: 5
+<transições>         uma por linha, no formato q a p          e.g.: 0 a 1
+...                  use - para transições vazias             e.g.: 0 - 2
+<q0>                 estado inicial                           e.g.: 0
+<|F|> <F>            número de estados finais e os estados    e.g.: 1 2
+<palavras>           uma por linha                            e.g.: aa
+...
+<fim>                string que indica o fim dos testes
+```
+### Descrição dos Arquivos
 
 | Arquivo | Descrição |
 |---|---|
