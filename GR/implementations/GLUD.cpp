@@ -1,7 +1,7 @@
 /*
     Autor: Gabriel de Souza Dourado
     Repositório: Automata Theory
-    Prática: Conversão de GRUD para AFND e simulação com backtracking (usando o algoritmo 1)
+    Prática: Conversão de GRUD para AFND e simulação com backtracking
 */
 
 #include <iostream>
@@ -48,28 +48,20 @@ AFND GLUD_to_AFND(const GLUD& glud) {
         for(const auto& [terminal, non_terminal]: prods) {
             if(non_terminal != '&') 
                 afnd.delta[{stateId[left_prod], terminal}].insert(stateId[non_terminal]);
-            else 
-                afnd.delta[{stateId[left_prod], terminal}].insert(finalState);
+            else {
+                if(terminal == '&')
+                    afnd.accepting.insert(stateId[left_prod]);
+                else
+                    afnd.delta[{stateId[left_prod], terminal}].insert(finalState); 
+            }       
         }
     }
     return afnd;
 }
 
 bool search(const AFND& afnd, const std::string& w, int q, int i, std::set<int> V) {
-    if (i == (int)w.length()) {
-        if (afnd.accepting.count(q) > 0) return true;
-
-        if (afnd.delta.count({q, '&'}) > 0)
-            for (int next : afnd.delta.at({q, '&'}))
-                if (V.count(next) == 0) {
-                    std::set<int> u = V;
-                    u.insert(next);
-                    if (search(afnd, w, next, i, u))
-                        return true;
-                }
-
-        return false;
-    }
+    if (i == (int)w.length()) 
+        return afnd.accepting.count(q) > 0;
 
     if (afnd.delta.count({q, w[i]}) > 0)
         for (int next : afnd.delta.at({q, w[i]}))
@@ -89,6 +81,7 @@ bool search(const AFND& afnd, const std::string& w, int q, int i, std::set<int> 
 }
 
 bool simulate(const AFND& afnd, const std::string& w) {
+
     std::string word = (w == "&") ? "" : w;
     if (search(afnd, word, afnd.initial, 0, {})) 
         return 1;
