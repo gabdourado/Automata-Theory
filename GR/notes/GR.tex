@@ -205,61 +205,28 @@ Dada uma GLUD $G = (V, T, P, S)$, deseja-se construir um AFND-$\epsilon$ $A = (Q
 A função $\delta$ de transição é definida da seguinte forma: \\
 \begin{center}
 \begin{tabular}{c|c}
-  \textbf{Regra de Produção} & \textbf{Função de Transição $\delta$} \\\hline
-  $A \rightarrow \epsilon$ & $\delta(A, \epsilon) = \{q_f\}$ \\
+  \textbf{Regra de Produção} & \textbf{Função de Transição $\delta$} \\\hline  
   $A \rightarrow \sigma$ & $\delta(A, \sigma) = \{q_f\}$ \\
   $A \rightarrow B$ & $\delta(A, \epsilon) = \{B\}$ \\
   $A \rightarrow \sigma B$ & $\delta(A, \sigma) = \{B\}$ \\
 \end{tabular}
 \end{center}
 
+Note que se uma transição é do tipo $A \rightarrow \varepsilon$, fazemos do estado $A$ um estado final. 
+
 \subsection{Algoritmo}
-O procedimento está descrito no algoritmo~\ref{alg:converte1}:
+O procedimento está descrito no algoritmo~\ref{alg:converte}:
 
 \begin{algorithm}[H]
   \caption{$\textsc{Converte}(G)$}
-  \label{alg:converte1}
+  \label{alg:converte}
   \begin{algorithmic}[1]
     \Require Uma GLUD $G = (V, T, P, S)$
     \Ensure Um AFND-$\varepsilon$ $M = (Q, \Sigma, \delta, q_0, F)$,
              onde $\delta : Q \times (\Sigma \cup \{\varepsilon\}) \rightharpoonup 2^Q$
 
-    \State $q_f \leftarrow$ novo estado; \quad $Q \leftarrow V \cup \{q_f\}$
-    \State $\Sigma \leftarrow T$
-    \State $q_0 \leftarrow S$
-    \State $F \leftarrow \{q_f\}$
-    \State $\delta \leftarrow \emptyset$
-
-    \For{cada produção $p \in P$}
-      \If{$p$ é da forma $A \rightarrow aB$}
-        \State $\delta(A,\, a) \leftarrow \delta(A,\, a) \cup \{B\}$
-      \ElsIf{$p$ é da forma $A \rightarrow a$}
-        \State $\delta(A,\, a) \leftarrow \delta(A,\, a) \cup \{q_f\}$
-      \ElsIf{$p$ é da forma $A \rightarrow B$}
-        \State $\delta(A,\, \varepsilon) \leftarrow \delta(A,\, \varepsilon) \cup \{B\}$
-      \ElsIf{$p$ é da forma $A \rightarrow \varepsilon$}
-        \State $\delta(A,\, \varepsilon) \leftarrow \delta(A,\, \varepsilon) \cup \{q_f\}$
-      \EndIf
-    \EndFor
-
-    \State \Return $M = (Q,\, \Sigma,\, \delta,\, q_0,\, F)$
-  \end{algorithmic}
-\end{algorithm}
-
-\newpage
-
-\section{Adaptação do Algoritmo~\ref{alg:converte1}}
-No algoritmo anterior, só existe um estado de aceitação, assim, para cada derivação do tipo $A \rightarrow \varepsilon$, onde $A \in V$, criamos uma transição do vazia desnecessária ($\delta(A, \epsilon) = \{q_f\}$). Podemos mudar essa abordagem, transfomando $A$ em um estado de aceitação. O algoritmo~\ref{alg:converte2} mostra isso:
-
-\begin{algorithm}[H]
-  \caption{$\textsc{Converte}(G)$ (adaptado)}
-  \label{alg:converte2}
-  \begin{algorithmic}[1]
-    \Require Uma GLUD $G = (V, T, P, S)$
-    \Ensure Um AFND-$\varepsilon$ $M = (Q, \Sigma, \delta, q_0, F)$,
-             onde $\delta : Q \times (\Sigma \cup \{\varepsilon\}) \rightharpoonup 2^Q$
-
-    \State $q_f \leftarrow$ novo estado; \quad $Q \leftarrow V \cup \{q_f\}$
+    \State $q_f \leftarrow$ novo estado
+    \State $Q \leftarrow V \cup \{q_f\}$
     \State $\Sigma \leftarrow T$
     \State $q_0 \leftarrow S$
     \State $F \leftarrow \{q_f\}$
@@ -280,6 +247,7 @@ No algoritmo anterior, só existe um estado de aceitação, assim, para cada der
     \State \Return $M = (Q,\, \Sigma,\, \delta,\, q_0,\, F)$
   \end{algorithmic}
 \end{algorithm}
+
 
 % ============================================================
 %  REFERÊNCIAS
